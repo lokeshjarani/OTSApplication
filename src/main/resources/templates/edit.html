@@ -32,38 +32,34 @@
         </thead>
         <tbody>
         <tr th:each="ots : ${otsList}">
-            <td th:text="${ots.id}"></td>
-            <td>
-                <input type="text" id="accounts" name="accounts" th:value="${ots.accounts}" class="form-control" required>
-                <label for="accounts">Accounts</label>
-            </td>
-            <td>
-                <input type="text" id="customerName" name="customerName" th:value="${ots.customerName}" class="form-control" required>
-                <label for="customerName">Customer Name</label>
-            </td>
-            <td>
-                <input type="text" id="otsAmount" name="otsAmount" th:value="${ots.otsAmount}" class="form-control" required>
-                <label for="otsAmount">OTS Amount</label>
-            </td>
-            <td>
-                <input type="date" id="sanctionDate" name="sanctionDate" th:value="${ots.sanctionDate}" class="form-control" required>
-                <label for="sanctionDate">Sanction Date</label>
-            </td>
-            <td>
-                <input type="date" id="expiryDate" name="expiryDate" th:value="${ots.expiryDate}" class="form-control" required>
-                <label for="expiryDate">Expiry Date</label>
-            </td>
-            <td th:text="${ots.updatedBy}"></td>
-            <td th:text="${ots.creationTime}"></td>
-            <td>
-                <form th:action="@{/edit}" method="post">
-                    <input type="hidden" name="id" th:value="${ots.id}">
+            <form th:action="@{/edit}" method="post" th:object="${ots}">
+                <td th:text="*{id}"></td>
+                <td>
+                    <input type="text" name="accounts" th:value="*{accounts}" class="form-control" required>
+                </td>
+                <td>
+                    <input type="text" name="customerName" th:value="*{customerName}" class="form-control" required>
+                </td>
+                <td>
+                    <input type="text" name="otsAmount" th:value="*{otsAmount}" class="form-control" required>
+                </td>
+                <td>
+                    <input type="date" name="sanctionDate" th:value="*{sanctionDate}" class="form-control" required>
+                </td>
+                <td>
+                    <input type="date" name="expiryDate" th:value="*{expiryDate}" class="form-control" required>
+                </td>
+                <td th:text="*{updatedBy}"></td>
+                <td th:text="*{creationTime}"></td>
+                <td>
+                    <input type="hidden" name="id" th:value="*{id}">
                     <button type="submit" class="btn btn-primary">Save</button>
-                </form>
-                <button type="button" class="btn btn-danger" th:onclick="'confirmDelete(' + ${ots.id} + ')'" >Delete</button>
+            </form>
+            <button type="button" class="btn btn-danger" th:onclick="'confirmDelete(' + ${ots.id} + ')'">Delete</button>
             </td>
         </tr>
         </tbody>
+
 
     </table>
 </div>
